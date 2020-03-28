@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="Covid19.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Application.Resources>
+        <OnPlatform
+            x:Key="FontAwesomeSolid"
+            x:TypeArguments="x:String"
+            Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
+        <OnPlatform
+            x:Key="FontAwesomeRegular"
+            x:TypeArguments="x:String"
+            Android="fa-regular-400.ttf#Font Awesome 5 Free Regular" />
+        <OnPlatform
+            x:Key="FontAwesomeBrands"
+            x:TypeArguments="x:String"
+            Android="fa-brands-400.ttf#Font Awesome 5 Brands Regular" />
+
+        <Color x:Key="BackgroundHigh">#121212</Color>
+        <Color x:Key="BackgroundMedium">#272727</Color>
+        <Color x:Key="BackgroundLow">#383838</Color>
+        <Color x:Key="BackgroundLow1">#363636</Color>
+
+        <Color x:Key="ForegroundHigh">#ffffff</Color>
+        <Color x:Key="ForegroundHigh1">#84c9fb</Color>
+        <Color x:Key="ForegroundMedium">#f0f0f0</Color>
+        <Color x:Key="ForegroundLow">#9d9d9d</Color>
+
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundHigh}" />
+            <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Body" />
+            <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+        </Style>
+
+        <Style x:Key="TitleStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+            <Setter Property="FontSize" Value="Title" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+    </Application.Resources>
+</Application>

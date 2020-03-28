@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Covid19.Views.ContainerView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    xmlns:views="clr-namespace:Covid19.Views"
+    shared:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{DynamicResource BackgroundHigh}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundMedium}" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid BackgroundColor="{DynamicResource BackgroundMedium}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding ShowMenuCommand}" Text="{x:Static shared:FontAwesomeSolid.Bars}" />
+            <Label
+                Grid.Column="1"
+                Style="{DynamicResource TitleStyle}"
+                Text="{Binding ChildViewTitle}" />
+        </Grid>
+        <ContentView
+            Grid.Row="1"
+            Content="{Binding ChildView}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <Grid Grid.Row="2" BackgroundColor="{DynamicResource BackgroundMedium}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Type views:ChartView}"
+                Text="{x:Static shared:FontAwesomeSolid.ChartBar}" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Type views:MapView}"
+                Text="{x:Static shared:FontAwesomeSolid.Map}" />
+            <Button
+                Grid.Column="2"
+                Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Type views:NewsView}"
+                Text="{x:Static shared:FontAwesomeSolid.Newspaper}" />
+            <Button
+                Grid.Column="3"
+                Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Type views:QuestionAnswersView}"
+                Text="{x:Static shared:FontAwesomeSolid.Question}" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

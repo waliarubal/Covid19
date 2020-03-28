@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Covid19.Views.QuestionAnswersView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Covid19.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    shared:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Grid>
+        <controls:BusyIndicator IsVisible="{Binding IsBusy}" />
+        <ScrollView IsVisible="{Binding IsBusy, Converter={shared:InverseBoolConverter}}">
+            <StackLayout BindableLayout.ItemsSource="{Binding QuestionAnswers}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Margin="0,6"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="StartAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                FontSize="Subtitle"
+                                Text="{Binding Question}"
+                                TextColor="{DynamicResource ForegroundHigh1}" />
+                            <StackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Answer}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Margin="0,2,0,0" Text="{Binding .}" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentView>

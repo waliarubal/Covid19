@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Covid19.Views.MapView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    shared:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Label Text="We are busy working on gathering reliable COVID-19 map data sources for you." />
+</ContentView>
