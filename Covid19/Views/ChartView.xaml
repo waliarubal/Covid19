@@ -10,29 +10,6 @@
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Frame BorderColor="{DynamicResource ForegroundLow}" CornerRadius="4">
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="Case Data Lookup" />
-                </StackLayout>
-            </Frame>
-            <Frame
-                Grid.Column="1"
-                BorderColor="{DynamicResource ForegroundLow}"
-                CornerRadius="4">
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="Top Ten Regions" />
-                </StackLayout>
-            </Frame>
-        </Grid>
-
-        <views:TabularView IsVisible="False" />
+        <views:TabularView />
     </Grid>
 </ContentView>
