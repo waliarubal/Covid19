@@ -3,66 +3,36 @@
     x:Class="Covid19.Views.ChartView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
+    xmlns:views="clr-namespace:Covid19.Views"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <controls:BusyIndicator Grid.RowSpan="2" IsVisible="{Binding IsBusy}" />
-        <Grid HorizontalOptions="Fill">
-            <Grid.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
-                    <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh1}" />
-                    <Setter Property="VerticalTextAlignment" Value="Center" />
-                    <Setter Property="FontSize" Value="Subtitle" />
-                </Style>
-            </Grid.Resources>
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="Region" />
-            <Label Grid.Column="1" Text="{x:Static shared:FontAwesomeSolid.HeadSideMask}" />
-            <Label Grid.Column="2" Text="{x:Static shared:FontAwesomeSolid.SkullCrossbones}" />
-            <Label Grid.Column="3" Text="{x:Static shared:FontAwesomeSolid.UserCheck}" />
-            <Label Grid.Column="4" Text="{x:Static shared:FontAwesomeSolid.Procedures}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Frame BorderColor="{DynamicResource ForegroundLow}" CornerRadius="4">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="Case Data Lookup" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Column="1"
+                BorderColor="{DynamicResource ForegroundLow}"
+                CornerRadius="4">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="Top Ten Regions" />
+                </StackLayout>
+            </Frame>
         </Grid>
-        <ScrollView Grid.Row="1" IsVisible="{Binding IsBusy, Converter={shared:InverseBoolConverter}}">
-            <StackLayout BindableLayout.ItemsSource="{Binding Cases}">
-                <StackLayout.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="FontSize" Value="Small" />
-                    </Style>
-                </StackLayout.Resources>
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalOptions="Fill">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label FontSize="Small" Text="{Binding Country}" />
-                            <Label Grid.Column="1" Text="{Binding Confirmed}" />
-                            <Label Grid.Column="2" Text="{Binding Deaths}" />
-                            <Label Grid.Column="3" Text="{Binding Recovered}" />
-                            <Label Grid.Column="4" Text="{Binding Active}" />
-                        </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </ScrollView>
+
+        <views:TabularView IsVisible="False" />
     </Grid>
 </ContentView>

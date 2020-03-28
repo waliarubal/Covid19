@@ -40,6 +40,18 @@
             <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
         </Style>
 
+        <Style TargetType="Entry">
+            <Setter Property="PlaceholderColor" Value="{DynamicResource ForegroundLow}" />
+            <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+            <Setter Property="TitleColor" Value="{DynamicResource ForegroundLow}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+
         <Style x:Key="TitleStyle" TargetType="Label">
             <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
             <Setter Property="FontSize" Value="Title" />
