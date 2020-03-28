@@ -21,7 +21,9 @@ namespace Covid19
         void RegisterDependencies()
         {
             ServiceLocator.Instance.RegisterSingleton<INavigationService, NavigationService>();
-            ServiceLocator.Instance.RegisterSingleton<ICovid19Service, Covid19Service>();
+            ServiceLocator.Instance.RegisterSingleton<IWhoService, WhoService>();
+            ServiceLocator.Instance.RegisterSingleton<IJhuCsseService, JhuCsseService>();
+            ServiceLocator.Instance.RegisterSingleton<INewsService, NewsService>();
         }
 
         protected override void OnStart()

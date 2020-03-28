@@ -12,11 +12,11 @@ namespace Covid19.ViewModels
     public class TabularViewModel : ViewModelBase
     {
         ICommand _refresh;
-        readonly ICovid19Service _covidService;
+        readonly IJhuCsseService _jhuCsseService;
 
-        public TabularViewModel(ICovid19Service covidService)
+        public TabularViewModel(IJhuCsseService jhuCsseService)
         {
-            _covidService = covidService;
+            _jhuCsseService = jhuCsseService;
 
             SearchCommand.Execute(null);
         }
@@ -50,7 +50,7 @@ namespace Covid19.ViewModels
         {
             IsBusy = true;
 
-            var cases = await _covidService.GetCases();
+            var cases = await _jhuCsseService.GetCases();
 
             if (string.IsNullOrEmpty(keywoard))
                 Cases = new ObservableCollection<Case>(cases);

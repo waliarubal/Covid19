@@ -10,13 +10,13 @@ namespace Covid19.ViewModels
     public class QuestionAnswersViewModel : ViewModelBase
     {
         ICommand _refresh;
-        readonly ICovid19Service _covidService;
+        readonly IWhoService _whoService;
 
-        public QuestionAnswersViewModel(ICovid19Service covidService)
+        public QuestionAnswersViewModel(IWhoService whoService)
         {
             Title = "Question & Answers";
 
-            _covidService = covidService;
+            _whoService = whoService;
 
             RefreshCommand.Execute(null);
         }
@@ -44,7 +44,7 @@ namespace Covid19.ViewModels
         {
             IsBusy = true;
 
-            var questionAnswers = await _covidService.GetQuestionAnswers();
+            var questionAnswers = await _whoService.GetQuestionAnswers();
             QuestionAnswers = new ObservableCollection<QuestionAnswer>(questionAnswers);
 
             IsBusy = false;
