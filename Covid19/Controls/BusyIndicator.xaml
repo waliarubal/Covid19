@@ -6,13 +6,11 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <StackLayout
-        HorizontalOptions="Center"
-        Orientation="Horizontal"
-        VerticalOptions="Center">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <ActivityIndicator IsRunning="True" Color="{DynamicResource ForegroundLow}" />
         <Label
-            Text="Loading data, please wait..."
+            HorizontalTextAlignment="Center"
+            Text="Please wait while we gather and crunch essential data for you."
             TextColor="{DynamicResource ForegroundLow}"
             VerticalTextAlignment="Center" />
     </StackLayout>

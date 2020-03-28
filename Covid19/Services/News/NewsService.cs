@@ -9,7 +9,6 @@ namespace Covid19.Services
 {
     public class NewsService: INewsService
     {
-        const string REDDIT_WORLD_NEWS = "https://www.reddit.com/r/worldnews.rss";
         const string BBC_NEWS = "http://feeds.bbci.co.uk/news/world/rss.xml";
         const string THE_NEW_YORK_TIMES = "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml";
         const string AL_JAZEERA = "https://www.aljazeera.com/xml/rss/all.xml";
@@ -24,10 +23,6 @@ namespace Covid19.Services
             string feedUrl;
             switch(source)
             {
-                case NewsSource.REDDITWorldNews:
-                    feedUrl = REDDIT_WORLD_NEWS;
-                    break;
-
                 case NewsSource.BBCNews:
                     feedUrl = BBC_NEWS;
                     break;

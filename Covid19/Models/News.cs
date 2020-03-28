@@ -7,7 +7,6 @@ namespace Covid19.Models
 {
     public enum NewsSource : byte
     {
-        REDDITWorldNews,
         BBCNews,
         TheNewYorkTimes,
         AlJazeera,
@@ -16,7 +15,7 @@ namespace Covid19.Models
         TimesOfIndia
     }
 
-    public class News: ModelBase
+    public class News : ModelBase
     {
         public News(NewsSource source, string title)
         {
@@ -51,13 +50,25 @@ namespace Covid19.Models
         public string Author
         {
             get => Get<string>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(IsHavingAuthor));
+            }
         }
+
+        public bool IsHavingAuthor => !string.IsNullOrWhiteSpace(Author);
 
         public DateTime? PublishingDate
         {
             get => Get<DateTime?>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(IsHavingPublisingDate));
+            }
         }
+
+        public bool IsHavingPublisingDate => PublishingDate.HasValue;
     }
 }

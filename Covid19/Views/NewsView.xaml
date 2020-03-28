@@ -3,10 +3,49 @@
     x:Class="Covid19.Views.NewsView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <Label Text="We are busy working on gathering reliable news sources for you." />
+    <Grid>
+        <controls:BusyIndicator IsVisible="{Binding IsBusy}" />
+        <ScrollView IsVisible="{Binding IsBusy, Converter={shared:InverseBoolConverter}}">
+            <StackLayout BindableLayout.ItemsSource="{Binding News}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="Fill">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                FontSize="Subtitle"
+                                Text="{Binding Title}"
+                                TextColor="{DynamicResource ForegroundHigh1}" />
+                            <Label
+                                Grid.Row="1"
+                                FontSize="Small"
+                                IsVisible="{Binding IsHavingPublishingDate}"
+                                Text="{Binding PublishingDate}"
+                                TextColor="{DynamicResource ForegroundLow}" />
+                            <Label
+                                Grid.Row="2"
+                                FontSize="Body"
+                                Text="{Binding Description}" />
+                            <Label
+                                Grid.Row="3"
+                                FontSize="Small"
+                                IsVisible="{Binding IsHavingAuthor}"
+                                Text="{Binding Author}"
+                                TextColor="{DynamicResource ForegroundLow}" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentView>
