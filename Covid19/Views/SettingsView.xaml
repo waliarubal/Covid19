@@ -6,6 +6,8 @@
     xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    shared:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{DynamicResource BackgroundHigh}"
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
@@ -15,7 +17,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <controls:HeaderBar Title="Settings" IsMenuAllowed="False" />
+        <controls:HeaderBar
+            Title="Settings"
+            HeightRequest="{Binding Height, Source={x:Reference FooterBar}}"
+            IsMenuAllowed="False" />
         <ScrollView Grid.Row="1">
             <Grid>
                 <Grid.Resources>
@@ -65,40 +70,44 @@
                     <StackLayout>
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="Al Jazeera" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsAlJazeera}" />
                         </Grid>
                         <BoxView />
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="BBC News" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsBbc}" />
                         </Grid>
                         <BoxView />
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="CNN" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsCnn}" />
                         </Grid>
                         <BoxView />
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="The New York Times" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsTheNewYorkTimes}" />
                         </Grid>
                         <BoxView />
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="Times Of India" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsTimesOfIndia}" />
                         </Grid>
                         <BoxView />
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="Yahoo News" />
-                            <Switch />
+                            <Switch IsToggled="{Binding IsYahooNews}" />
                         </Grid>
                     </StackLayout>
                 </Frame>
             </Grid>
         </ScrollView>
-        <Grid Grid.Row="2" BackgroundColor="{DynamicResource BackgroundLow2}">
+        <Grid
+            x:Name="FooterBar"
+            Grid.Row="2"
+            BackgroundColor="{DynamicResource BackgroundLow2}">
             <Button
                 BackgroundColor="{DynamicResource BackgroundLow2}"
+                Command="{Binding SaveCommand}"
                 HorizontalOptions="End"
                 Text="SAVE"
                 TextColor="{DynamicResource ForegroundHigh1}" />

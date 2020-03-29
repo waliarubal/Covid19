@@ -6,7 +6,9 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
+    xmlns:views="clr-namespace:Covid19.Views"
     Title="COVID-19"
+    shared:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{DynamicResource BackgroundLow1}"
     mc:Ignorable="d">
     <Grid Padding="16">
@@ -50,6 +52,9 @@
         <StackLayout Grid.Row="1">
             <Label Style="{DynamicResource Icon}" Text="{x:Static shared:FontAwesomeSolid.Cog}" />
             <Label Text="Settings" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:SettingsView}" />
+            </StackLayout.GestureRecognizers>
         </StackLayout>
 
     </Grid>

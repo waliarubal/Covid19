@@ -11,5 +11,7 @@ namespace Covid19.Services
         void Quit();
 
         Task Navigate(Type viewType, bool isModal = false);
+
+        Task Close();
     }
 }

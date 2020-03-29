@@ -22,7 +22,7 @@ namespace Covid19.Controls
         static HeaderBar()
         {
             TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(HeaderBar), string.Empty, BindingMode.OneWay);
-            IsMenuAllowedProperty = BindableProperty.Create(nameof(Title), typeof(bool), typeof(HeaderBar), true, BindingMode.OneWay);
+            IsMenuAllowedProperty = BindableProperty.Create(nameof(IsMenuAllowed), typeof(bool), typeof(HeaderBar), true, BindingMode.OneWay);
         }
 
         public HeaderBar()

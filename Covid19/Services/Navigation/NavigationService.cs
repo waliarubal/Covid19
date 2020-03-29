@@ -54,5 +54,15 @@ namespace Covid19.Services
 
             handler.Invoke(view);
         }
+
+        public async Task Close()
+        {
+            var mainView = Application.Current.MainPage as MasterDetailPage;
+            if (mainView == null)
+                return;
+
+            if (mainView.Navigation.ModalStack.Count > 0)
+                await mainView.Navigation.PopModalAsync();
+        }
     }
 }
