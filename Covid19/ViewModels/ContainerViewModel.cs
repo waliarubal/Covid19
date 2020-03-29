@@ -10,7 +10,7 @@ namespace Covid19.ViewModels
 {
     public class ContainerViewModel : ViewModelBase
     {
-        ICommand _showMenu, _navigate;
+        ICommand _navigate;
         readonly NavigationService _navigationService;
 
         public ContainerViewModel(INavigationService navigationService)
@@ -41,17 +41,6 @@ namespace Covid19.ViewModels
             private set => Set(value);
         }
 
-        public ICommand ShowMenuCommand
-        {
-            get
-            {
-                if (_showMenu == null)
-                    _showMenu = new RelayCommand(ShowMenuAction);
-
-                return _showMenu;
-            }
-        }
-
         public ICommand NavigateCommand
         {
             get
@@ -65,11 +54,6 @@ namespace Covid19.ViewModels
 
         #endregion
 
-        void ShowMenuAction()
-        {
-            _navigationService.ShowMenu();
-        }
-
         void OnNavigationRequested(View view)
         {
             ChildView = view;
@@ -81,9 +65,9 @@ namespace Covid19.ViewModels
                 ChildViewTitle = string.Empty;
         }
 
-        void NavigateAction(Type viewType)
+        async void NavigateAction(Type viewType)
         {
-            _navigationService.Navigate(viewType);
+            await _navigationService.Navigate(viewType);
         }
     }
 }

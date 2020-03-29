@@ -18,7 +18,7 @@ namespace Covid19.ViewModels
 
             _newsService = newsService;
 
-            SearchCommand.Execute(null);
+            RefreshCommand.Execute(null);
         }
 
         public ObservableCollection<News> News
@@ -29,22 +29,22 @@ namespace Covid19.ViewModels
 
         public override bool IsCachable => true;
 
-        public ICommand SearchCommand
+        public ICommand RefreshCommand
         {
             get
             {
                 if (_refresh == null)
-                    _refresh = new RelayCommand<string>(SearchAction) { IsAsynchronous = true };
+                    _refresh = new RelayCommand<string>(RefreshAction) { IsAsynchronous = true };
 
                 return _refresh;
             }
         }
 
-        async void SearchAction(string keywoard)
+        async void RefreshAction(string keywoard)
         {
             IsBusy = true;
 
-            var news = await _newsService.GetFeed(NewsSource.TimesOfIndia);
+            var news = await _newsService.GetFeed(NewsSource.BBCNews);
             News = new ObservableCollection<News>(news);
 
             IsBusy = false;

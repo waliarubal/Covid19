@@ -3,6 +3,7 @@
     x:Class="Covid19.Views.ContainerView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
@@ -27,17 +28,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid BackgroundColor="{DynamicResource BackgroundMedium}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Command="{Binding ShowMenuCommand}" Text="{x:Static shared:FontAwesomeSolid.Bars}" />
-            <Label
-                Grid.Column="1"
-                Style="{DynamicResource TitleStyle}"
-                Text="{Binding ChildViewTitle}" />
-        </Grid>
+        <controls:HeaderBar Title="{Binding ChildViewTitle}" />
         <ContentView
             Grid.Row="1"
             Content="{Binding ChildView}"

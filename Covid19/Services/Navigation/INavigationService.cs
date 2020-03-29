@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Covid19.Services
 {
@@ -9,6 +10,6 @@ namespace Covid19.Services
 
         void Quit();
 
-        void Navigate(Type viewType, bool isModal = false);
+        Task Navigate(Type viewType, bool isModal = false);
     }
 }

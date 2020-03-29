@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Covid19.Controls.HeaderBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    x:Name="this"
+    mc:Ignorable="d">
+    <Grid BackgroundColor="{DynamicResource BackgroundMedium}" BindingContext="{x:Reference this}">
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundMedium}" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button
+            Command="{Binding ShowMenuCommand}"
+            IsVisible="{Binding IsMenuAllowed}"
+            Text="{x:Static shared:FontAwesomeSolid.Bars}" />
+        <Label
+            Grid.Column="1"
+            Style="{DynamicResource TitleStyle}"
+            Text="{Binding Title}" />
+    </Grid>
+</ContentView>

@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Covid19.Controls"
+    xmlns:converters="clr-namespace:Covid19.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
@@ -15,37 +16,48 @@
             <StackLayout BindableLayout.ItemsSource="{Binding News}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalOptions="Fill">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                FontSize="Subtitle"
-                                Text="{Binding Title}"
-                                TextColor="{DynamicResource ForegroundHigh1}" />
-                            <Label
-                                Grid.Row="1"
-                                FontSize="Small"
-                                IsVisible="{Binding IsHavingPublishingDate}"
-                                Text="{Binding PublishingDate}"
-                                TextColor="{DynamicResource ForegroundLow}" />
-                            <Label
-                                Grid.Row="2"
-                                FontSize="Body"
-                                Text="{Binding Description}" />
-                            <Label
-                                Grid.Row="3"
-                                FontSize="Small"
-                                IsVisible="{Binding IsHavingAuthor}"
-                                Text="{Binding Author}"
-                                TextColor="{DynamicResource ForegroundLow}" />
-                        </Grid>
+                        <Frame
+                            BackgroundColor="#1E1E1E"
+                            CornerRadius="12"
+                            HorizontalOptions="Fill">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    FontSize="Subtitle"
+                                    Text="{Binding Title}"
+                                    TextColor="{DynamicResource ForegroundHigh1}" />
+                                <Label Grid.Row="1" Text="{Binding Description}" />
+                                <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                    <StackLayout.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="FontSize" Value="Small" />
+                                            <Setter Property="TextColor" Value="{DynamicResource ForegroundLow}" />
+                                        </Style>
+                                    </StackLayout.Resources>
+                                    <Label Text="{Binding Source, Converter={converters:NewsSourceNameConverter}}" />
+                                    <Label IsVisible="{Binding IsHavingPublishingDate}" Text="{Binding PublishingDate, StringFormat='- {0}'}" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
         </ScrollView>
+        <Button
+            Margin="0,0,8,8"
+            BackgroundColor="#5eb9fb"
+            Command="{Binding RefreshCommand}"
+            CornerRadius="26"
+            FontFamily="{DynamicResource FontAwesomeSolid}"
+            HeightRequest="52"
+            HorizontalOptions="End"
+            Text="{x:Static shared:FontAwesomeSolid.SyncAlt}"
+            TextColor="{DynamicResource BackgroundHigh}"
+            VerticalOptions="End"
+            WidthRequest="52" />
     </Grid>
 </ContentView>

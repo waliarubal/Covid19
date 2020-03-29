@@ -18,7 +18,7 @@ namespace Covid19.ViewModels
         {
             _jhuCsseService = jhuCsseService;
 
-            SearchCommand.Execute(null);
+            SearchCommand.Execute(Keywoard);
         }
 
         public override bool IsCachable => true;

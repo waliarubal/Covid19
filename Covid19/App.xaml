@@ -21,9 +21,11 @@
             Android="fa-brands-400.ttf#Font Awesome 5 Brands Regular" />
 
         <Color x:Key="BackgroundHigh">#121212</Color>
+        <Color x:Key="BackgroundHigh1">#1e1e1e</Color>
         <Color x:Key="BackgroundMedium">#272727</Color>
         <Color x:Key="BackgroundLow">#383838</Color>
         <Color x:Key="BackgroundLow1">#363636</Color>
+        <Color x:Key="BackgroundLow2">#2e2e2e</Color>
 
         <Color x:Key="ForegroundHigh">#ffffff</Color>
         <Color x:Key="ForegroundHigh1">#84c9fb</Color>
@@ -50,12 +52,6 @@
             <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
             <Setter Property="TitleColor" Value="{DynamicResource ForegroundLow}" />
             <Setter Property="BackgroundColor" Value="Transparent" />
-        </Style>
-
-        <Style x:Key="TitleStyle" TargetType="Label">
-            <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
-            <Setter Property="FontSize" Value="Title" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
         </Style>
     </Application.Resources>
 </Application>

@@ -55,7 +55,7 @@ namespace Covid19.Services
                 news.Description = item.Description;
                 news.Content = item.Content;
                 news.Author = item.Author;
-                news.PublishingDate = item.PublishingDate;
+                news.PublishingDate = item.PublishingDate.HasValue ? item.PublishingDate.Value : default(DateTime);
                 newsItems.Add(news);
             }
 

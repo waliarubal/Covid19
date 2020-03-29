@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Covid19.Services
@@ -20,8 +21,29 @@ namespace Covid19.Services
             Process.GetCurrentProcess().CloseMainWindow();
         }
 
-        public void Navigate(Type viewType, bool isModal = false)
+        public async Task Navigate(Type viewType, bool isModal = false)
         {
+            if (isModal)
+            {
+                var modalView = Activator.CreateInstance(viewType) as Page;
+                if (modalView == null)
+                    return;
+
+                var mainView = Application.Current.MainPage as MasterDetailPage;
+                if (mainView == null)
+                    return;
+
+                // close any open modal view
+                if (mainView.Navigation.ModalStack.Count > 0)
+                    await mainView.Navigation.PopModalAsync();
+
+                // hide menu
+                mainView.IsPresented = false;
+
+                await mainView.Navigation.PushModalAsync(modalView);
+                return;
+            }
+
             var handler = NavigationRequested;
             if (handler == null)
                 return;

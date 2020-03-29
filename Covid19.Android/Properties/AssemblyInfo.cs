@@ -2,17 +2,17 @@
 using System.Runtime.InteropServices;
 using Android.App;
 
-[assembly: Application(Icon = "@drawable/icon")]
+[assembly: Application(Icon = "@drawable/icon", UsesCleartextTraffic = true)]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Covid19.Android")]
+[assembly: AssemblyTitle("COVID-19")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Covid19.Android")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © Rubal Walia 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

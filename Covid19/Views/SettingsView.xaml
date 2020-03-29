@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Covid19.Views.SettingsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Covid19.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{DynamicResource BackgroundHigh}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <controls:HeaderBar Title="Settings" IsMenuAllowed="False" />
+        <ScrollView Grid.Row="1">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="BoxView">
+                        <Setter Property="HorizontalOptions" Value="Fill" />
+                        <Setter Property="VerticalOptions" Value="Center" />
+                        <Setter Property="HeightRequest" Value="2" />
+                        <Setter Property="Color" Value="#2c2c2c" />
+                    </Style>
+                    <Style x:Key="SubTitleStyle" TargetType="Label">
+                        <Setter Property="FontSize" Value="Body" />
+                        <Setter Property="TextColor" Value="{DynamicResource ForegroundLow}" />
+                        <Setter Property="Padding" Value="16,4,16,4" />
+                    </Style>
+                    <Style TargetType="Frame">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundHigh1}" />
+                        <Setter Property="Margin" Value="8,0,8,0" />
+                        <Setter Property="CornerRadius" Value="4" />
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="Body" />
+                        <Setter Property="VerticalTextAlignment" Value="Center" />
+                    </Style>
+                    <Style x:Key="ContainerStyle" TargetType="Grid">
+                        <Setter Property="ColumnDefinitions">
+                            <Setter.Value>
+                                <ColumnDefinitionCollection>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </ColumnDefinitionCollection>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Margin" Value="12,4,12,4" />
+                    </Style>
+                    <Style TargetType="Switch">
+                        <Setter Property="Grid.Column" Value="1" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Style="{DynamicResource SubTitleStyle}" Text="News Sources" />
+                <Frame Grid.Row="1">
+                    <StackLayout>
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="Al Jazeera" />
+                            <Switch />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="BBC News" />
+                            <Switch />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="CNN" />
+                            <Switch />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="The New York Times" />
+                            <Switch />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="Times Of India" />
+                            <Switch />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label Text="Yahoo News" />
+                            <Switch />
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </ScrollView>
+        <Grid Grid.Row="2" BackgroundColor="{DynamicResource BackgroundLow2}">
+            <Button
+                BackgroundColor="{DynamicResource BackgroundLow2}"
+                HorizontalOptions="End"
+                Text="SAVE"
+                TextColor="{DynamicResource ForegroundHigh1}" />
+        </Grid>
+    </Grid>
+</ContentPage>

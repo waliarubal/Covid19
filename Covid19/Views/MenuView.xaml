@@ -5,8 +5,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
     Title="COVID-19"
     BackgroundColor="{DynamicResource BackgroundLow1}"
     mc:Ignorable="d">
+    <Grid Padding="16">
+        <Grid.Resources>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="Icon" TargetType="Label">
+                <Setter Property="TextColor" Value="#767676" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                <Setter Property="Margin" Value="0,0,6,0" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="Margin" Value="8,0" />
+            </Style>
+            <Style TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="0,8" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+        <Label Style="{DynamicResource TitleStyle}" Text="COVID-19" />
+
+        <StackLayout Grid.Row="1">
+            <Label Style="{DynamicResource Icon}" Text="{x:Static shared:FontAwesomeSolid.Cog}" />
+            <Label Text="Settings" />
+        </StackLayout>
+
+    </Grid>
 </ContentPage>

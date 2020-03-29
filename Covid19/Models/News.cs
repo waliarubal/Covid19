@@ -59,16 +59,16 @@ namespace Covid19.Models
 
         public bool IsHavingAuthor => !string.IsNullOrWhiteSpace(Author);
 
-        public DateTime? PublishingDate
+        public DateTime PublishingDate
         {
-            get => Get<DateTime?>();
+            get => Get<DateTime>();
             set
             {
                 Set(value);
-                RaisePropertyChanged(nameof(IsHavingPublisingDate));
+                RaisePropertyChanged(nameof(IsHavingPublishingDate));
             }
         }
 
-        public bool IsHavingPublisingDate => PublishingDate.HasValue;
+        public bool IsHavingPublishingDate => PublishingDate != DateTime.MinValue;
     }
 }
