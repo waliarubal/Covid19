@@ -16,6 +16,7 @@ namespace Covid19.ViewModels
 
         public TabularViewModel(IJhuCsseService jhuCsseService)
         {
+            Title = "Tabular View";
             _jhuCsseService = jhuCsseService;
 
             SearchCommand.Execute(Keywoard);

@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
             <Button
                 Command="{Binding NavigateCommand}"
-                CommandParameter="{x:Type views:ChartView}"
+                CommandParameter="{x:Type views:StatisticsView}"
                 Text="{x:Static shared:FontAwesomeSolid.ChartBar}" />
             <Button
                 Grid.Column="1"

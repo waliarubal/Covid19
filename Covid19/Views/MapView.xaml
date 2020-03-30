@@ -8,5 +8,5 @@
     xmlns:shared="https://github.com/waliarubal/schemas"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <Label Text="We are busy working on gathering reliable COVID-19 map data sources for you." />
+    <Label HorizontalTextAlignment="Center" Text="We are busy working on gathering reliable COVID-19 map data sources for you." />
 </ContentView>

@@ -20,7 +20,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Entry Placeholder="Looking for region?" Text="{Binding Keywoard}" />
+            <Entry
+                BackgroundColor="{DynamicResource BackgroundLow1}"
+                Placeholder="Search Regions"
+                Text="{Binding Keywoard}" />
             <Button
                 Grid.Column="1"
                 Command="{Binding SearchCommand}"

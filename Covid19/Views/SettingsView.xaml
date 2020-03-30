@@ -28,7 +28,7 @@
                         <Setter Property="HorizontalOptions" Value="Fill" />
                         <Setter Property="VerticalOptions" Value="Center" />
                         <Setter Property="HeightRequest" Value="2" />
-                        <Setter Property="Color" Value="#2c2c2c" />
+                        <Setter Property="Color" Value="{DynamicResource SeparatorColor}" />
                     </Style>
                     <Style x:Key="SubTitleStyle" TargetType="Label">
                         <Setter Property="FontSize" Value="Body" />
@@ -44,11 +44,16 @@
                     <Style TargetType="Label">
                         <Setter Property="FontSize" Value="Body" />
                         <Setter Property="VerticalTextAlignment" Value="Center" />
+                        <Setter Property="Grid.Column" Value="1" />
+                    </Style>
+                    <Style TargetType="Switch">
+                        <Setter Property="Grid.Column" Value="2" />
                     </Style>
                     <Style x:Key="ContainerStyle" TargetType="Grid">
                         <Setter Property="ColumnDefinitions">
                             <Setter.Value>
                                 <ColumnDefinitionCollection>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </ColumnDefinitionCollection>
@@ -56,17 +61,32 @@
                         </Setter>
                         <Setter Property="Margin" Value="12,4,12,4" />
                     </Style>
-                    <Style TargetType="Switch">
-                        <Setter Property="Grid.Column" Value="1" />
-                    </Style>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Style="{DynamicResource SubTitleStyle}" Text="News Sources" />
+                <Label Style="{DynamicResource SubTitleStyle}" Text="Statistics" />
                 <Frame Grid.Row="1">
+                    <Grid Padding="0,4" Style="{DynamicResource ContainerStyle}">
+                        <Label
+                            Grid.Column="0"
+                            Margin="0,0,4,0"
+                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                            Text="{x:Static shared:FontAwesomeSolid.ChartPie}" />
+                        <Label Text="Show graphical view on start." />
+                        <Switch IsToggled="{Binding IsGraphical}" />
+                    </Grid>
+                </Frame>
+
+                <Label
+                    Grid.Row="2"
+                    Style="{DynamicResource SubTitleStyle}"
+                    Text="News Sources" />
+                <Frame Grid.Row="3">
                     <StackLayout>
                         <Grid Style="{DynamicResource ContainerStyle}">
                             <Label Text="Al Jazeera" />

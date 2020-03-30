@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Covid19.Services
 {
@@ -13,5 +14,7 @@ namespace Covid19.Services
         Task Navigate(Type viewType, bool isModal = false);
 
         Task Close();
+
+        View GetView(Type viewType);
     }
 }

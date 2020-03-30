@@ -16,6 +16,15 @@ namespace Covid19.Services
                 mainView.IsPresented = true;
         }
 
+        public View GetView(Type viewType)
+        {
+            var view = Activator.CreateInstance(viewType) as View;
+            if (view == null)
+                return default;
+
+            return view;
+        }
+
         public void Quit()
         {
             Process.GetCurrentProcess().CloseMainWindow();
@@ -48,7 +57,7 @@ namespace Covid19.Services
             if (handler == null)
                 return;
 
-            var view = Activator.CreateInstance(viewType) as View;
+            var view = GetView(viewType);
             if (view == null)
                 return;
 

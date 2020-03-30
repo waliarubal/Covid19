@@ -18,7 +18,7 @@ namespace Covid19.ViewModels
             _navigationService = navigationService as NavigationService;
             _navigationService.NavigationRequested += OnNavigationRequested;
 
-            NavigateCommand.Execute(typeof(ChartView));
+            NavigateCommand.Execute(typeof(StatisticsView));
         }
         ~ContainerViewModel()
         {

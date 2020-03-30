@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Covid19.Views.StatisticsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    shared:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                FontFamily="{DynamicResource FontAwesomeSolid}"
+                IsVisible="{Binding IsGraphical, Converter={shared:InverseBoolConverter}}"
+                Text="{x:Static shared:FontAwesomeSolid.Table}" />
+            <Label
+                FontFamily="{DynamicResource FontAwesomeSolid}"
+                IsVisible="{Binding IsGraphical}"
+                Text="{x:Static shared:FontAwesomeSolid.ChartPie}" />
+            <Label Grid.Column="1" Text="{Binding ChildViewTitle, FallbackValue='Table'}" />
+            <Switch
+                Grid.Column="2"
+                Margin="4,0,0,0"
+                IsToggled="{Binding IsGraphical}" />
+        </Grid>
+        <ContentView Grid.Row="1" Content="{Binding ChildView}" />
+    </Grid>
+</ContentView>

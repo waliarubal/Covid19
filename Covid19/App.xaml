@@ -27,6 +27,9 @@
         <Color x:Key="BackgroundLow1">#363636</Color>
         <Color x:Key="BackgroundLow2">#2e2e2e</Color>
 
+        <Color x:Key="CardBackground">#1e1e1e</Color>
+        <Color x:Key="SeparatorColor">#2c2c2c</Color>
+
         <Color x:Key="ForegroundHigh">#ffffff</Color>
         <Color x:Key="ForegroundHigh1">#84c9fb</Color>
         <Color x:Key="ForegroundMedium">#f0f0f0</Color>
@@ -40,6 +43,7 @@
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="Body" />
             <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
         </Style>
 
         <Style TargetType="Entry">

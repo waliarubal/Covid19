@@ -5,11 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:shared="https://github.com/waliarubal/schemas"
-    xmlns:views="clr-namespace:Covid19.Views"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <Grid>
-        <views:TabularView />
-    </Grid>
+    <ScrollView>
+        <StackLayout HorizontalOptions="Fill">
+            <Frame
+                BackgroundColor="{DynamicResource CardBackground}"
+                CornerRadius="12"
+                HorizontalOptions="Fill">
+                <microcharts:ChartView />
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentView>

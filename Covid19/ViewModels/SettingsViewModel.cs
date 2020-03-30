@@ -22,13 +22,23 @@ namespace Covid19.ViewModels
 
         #region properties
 
+        public bool IsGraphical
+        {
+            get => _settingsService.Get<bool>(nameof(IsGraphical));
+            set
+            {
+                _settingsService.Set(nameof(IsGraphical), value);
+                RaisePropertyChanged();
+            }
+        }
+
         public bool IsAlJazeera
         {
             get => _settingsService.Get<bool>(nameof(IsAlJazeera));
             set
             {
                 _settingsService.Set(nameof(IsAlJazeera), value);
-                RaisePropertyChanged(nameof(IsAlJazeera));
+                RaisePropertyChanged();
             }
         }
 
@@ -38,7 +48,7 @@ namespace Covid19.ViewModels
             set
             {
                 _settingsService.Set(nameof(IsBbc), value);
-                RaisePropertyChanged(nameof(IsBbc));
+                RaisePropertyChanged();
             }
         }
 
@@ -48,7 +58,7 @@ namespace Covid19.ViewModels
             set
             {
                 _settingsService.Set(nameof(IsCnn), value);
-                RaisePropertyChanged(nameof(IsCnn));
+                RaisePropertyChanged();
             }
         }
 

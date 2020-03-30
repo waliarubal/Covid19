@@ -17,7 +17,7 @@
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Frame
-                            BackgroundColor="#1E1E1E"
+                            BackgroundColor="{DynamicResource CardBackground}"
                             CornerRadius="12"
                             HorizontalOptions="Fill">
                             <Grid>
@@ -39,7 +39,7 @@
                                         </Style>
                                     </StackLayout.Resources>
                                     <Label Text="{Binding Source, Converter={converters:NewsSourceNameConverter}}" />
-                                    <Label IsVisible="{Binding IsHavingPublishingDate}" Text="{Binding PublishingDate, StringFormat='- {0}'}" />
+                                    <Label IsVisible="{Binding IsHavingPublishingDate}" Text="{Binding PublishingDate, StringFormat='- {0}', Converter={shared:RelativeTimeConverter}}" />
                                 </StackLayout>
                             </Grid>
                         </Frame>
