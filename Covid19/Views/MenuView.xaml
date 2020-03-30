@@ -11,51 +11,76 @@
     shared:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{DynamicResource BackgroundLow1}"
     mc:Ignorable="d">
-    <Grid Padding="16">
+    <Grid>
         <Grid.Resources>
             <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
                 <Setter Property="FontSize" Value="Title" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-            </Style>
-            <Style x:Key="Icon" TargetType="Label">
-                <Setter Property="TextColor" Value="#767676" />
-                <Setter Property="FontSize" Value="Large" />
-                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
-                <Setter Property="Margin" Value="0,0,6,0" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
-                <Setter Property="FontSize" Value="Subtitle" />
-                <Setter Property="Margin" Value="8,0" />
-            </Style>
-            <Style TargetType="StackLayout">
-                <Setter Property="Orientation" Value="Horizontal" />
-                <Setter Property="Margin" Value="0,8" />
+                <Setter Property="Margin" Value="16" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <Label Style="{DynamicResource TitleStyle}" Text="COVID-19" />
 
-        <StackLayout Grid.Row="1">
-            <Label Style="{DynamicResource Icon}" Text="{x:Static shared:FontAwesomeSolid.Cog}" />
-            <Label Text="Settings" />
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:SettingsView}" />
-            </StackLayout.GestureRecognizers>
-        </StackLayout>
+        <Grid Grid.Row="1" Padding="16,0">
+            <Grid.Resources>
+                <Style x:Key="Icon" TargetType="Label">
+                    <Setter Property="TextColor" Value="#767676" />
+                    <Setter Property="FontSize" Value="Large" />
+                    <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                    <Setter Property="Margin" Value="0,0,6,0" />
+                    <Setter Property="VerticalTextAlignment" Value="Center" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                    <Setter Property="FontSize" Value="Subtitle" />
+                    <Setter Property="Margin" Value="8" />
+                    <Setter Property="Grid.Column" Value="1" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <Label Style="{DynamicResource Icon}" Text="{x:Static shared:FontAwesomeSolid.Cog}" />
+            <Label Text="Settings">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:SettingsView}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label
+                Grid.Row="1"
+                Style="{DynamicResource Icon}"
+                Text="{x:Static shared:FontAwesomeSolid.Info}" />
+            <Label Grid.Row="1" Text="About">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:AboutView}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <Label
+            Grid.Row="2"
+            Margin="0,0,0,2"
+            FontSize="Small"
+            HorizontalOptions="Fill"
+            HorizontalTextAlignment="Center"
+            Text="{Binding VersionString}"
+            TextColor="{DynamicResource ForegroundLow}" />
     </Grid>
+
 </ContentPage>

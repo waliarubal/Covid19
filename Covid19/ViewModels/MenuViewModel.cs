@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 
 namespace Covid19.ViewModels
 {
@@ -30,6 +31,8 @@ namespace Covid19.ViewModels
                 return _navigate;
             }
         }
+
+        public string VersionString => $"Version {VersionTracking.CurrentVersion} (Build {VersionTracking.CurrentBuild})";
 
         public override bool IsCachable => true;
 
