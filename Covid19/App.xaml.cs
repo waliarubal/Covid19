@@ -13,8 +13,12 @@ namespace Covid19
 {
     public partial class App : Application
     {
+        const string SYNCFUSION_LICENE_KEY = "MjI5OTQ5QDMxMzcyZTM0MmUzME1JMDNackF4K2dqdkpRa1h6NFNmemo1UjZQcndzaERySHFYQzVJb2VZSm89";
+
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SYNCFUSION_LICENE_KEY);
+
             InitializeComponent();
             VersionTracking.Track();
             RegisterDependencies();

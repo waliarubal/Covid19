@@ -16,10 +16,7 @@
             <StackLayout BindableLayout.ItemsSource="{Binding News}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Frame
-                            BackgroundColor="{DynamicResource CardBackground}"
-                            CornerRadius="12"
-                            HorizontalOptions="Fill">
+                        <Frame Style="{DynamicResource CardStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -49,7 +46,7 @@
         </ScrollView>
         <Button
             Margin="0,0,8,8"
-            BackgroundColor="#5eb9fb"
+            BackgroundColor="{DynamicResource ButtonColor}"
             Command="{Binding RefreshCommand}"
             CornerRadius="26"
             FontFamily="{DynamicResource FontAwesomeSolid}"

@@ -3,19 +3,75 @@
     x:Class="Covid19.Views.ChartView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:shared="https://github.com/waliarubal/schemas"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <ScrollView>
+        <ScrollView.Resources>
+            <Style TargetType="chart:SfChart">
+                <Setter Property="HeightRequest" Value="160" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+        </ScrollView.Resources>
         <StackLayout HorizontalOptions="Fill">
-            <Frame
-                BackgroundColor="{DynamicResource CardBackground}"
-                CornerRadius="12"
-                HorizontalOptions="Fill">
-                <microcharts:ChartView />
+            <Frame Style="{DynamicResource CardStyle}">
+                <StackLayout>
+                    <chart:SfChart>
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:CategoryAxis />
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis />
+                        </chart:SfChart.SecondaryAxis>
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend />
+                        </chart:SfChart.Legend>
+                        <chart:SfChart.ChartBehaviors>
+                            <chart:ChartTooltipBehavior
+                                BackgroundColor="{DynamicResource BackgroundHigh}"
+                                FontAttributes="Bold"
+                                TextColor="{DynamicResource ForegroundHigh}" />
+                        </chart:SfChart.ChartBehaviors>
+
+                        <chart:ColumnSeries
+                            EnableTooltip="True"
+                            ItemsSource="{Binding Cases}"
+                            Label="Confirmed"
+                            XBindingPath="Country"
+                            YBindingPath="Confirmed"
+                            Color="#fcf4a3" />
+                        <chart:ColumnSeries
+                            EnableTooltip="True"
+                            ItemsSource="{Binding Cases}"
+                            Label="Deaths"
+                            XBindingPath="Country"
+                            YBindingPath="Deaths"
+                            Color="#ea3c53" />
+                        <chart:ColumnSeries
+                            EnableTooltip="True"
+                            ItemsSource="{Binding Cases}"
+                            Label="Recovered"
+                            XBindingPath="Country"
+                            YBindingPath="Recovered"
+                            Color="#98fb98" />
+                        <chart:ColumnSeries
+                            EnableTooltip="True"
+                            ItemsSource="{Binding Cases}"
+                            Label="Active"
+                            XBindingPath="Country"
+                            YBindingPath="Active"
+                            Color="#73c2fb" />
+                    </chart:SfChart>
+                    <Label Text="Five Most Impacted Regions" />
+                </StackLayout>
             </Frame>
         </StackLayout>
     </ScrollView>
