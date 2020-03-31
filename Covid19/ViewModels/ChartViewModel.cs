@@ -25,18 +25,17 @@ namespace Covid19.ViewModels
 
         #region properties
 
-        public ObservableCollection<Case> TopFiveCases
+        public CaseCollection TopFiveCases
         {
-            get => Get<ObservableCollection<Case>>();
+            get => Get<CaseCollection>();
             private set => Set(value);
         }
 
-        public ObservableCollection<Case> BottomFiveCases
+        public CaseCollection BottomFiveCases
         {
-            get => Get<ObservableCollection<Case>>();
+            get => Get<CaseCollection>();
             private set => Set(value);
         }
-
 
         public override bool IsCachable => true;
 
@@ -57,14 +56,14 @@ namespace Covid19.ViewModels
         {
             var cases = await _jhuCsseService.GetCases(null);
 
-            IEnumerable<Case> topFive, bottomFive;
-            TopFive(new List<Case>(cases), out topFive, out bottomFive);
+            CaseCollection topFive, bottomFive;
+            TopFive(cases, out topFive, out bottomFive);
 
-            TopFiveCases = new ObservableCollection<Case>(topFive);
-            BottomFiveCases = new ObservableCollection<Case>(bottomFive);
+            TopFiveCases = topFive;
+            BottomFiveCases = bottomFive;
         }
 
-        void TopFive(IList<Case> cases, out IEnumerable<Case> topFiveCases, out IEnumerable<Case> bottomFiveCases)
+        void TopFive(CaseCollection cases, out CaseCollection topFiveCases, out CaseCollection bottomFiveCases)
         {
             var topFive = new Case[5];
             for (var index = 0; index < 5; index++)
@@ -74,75 +73,75 @@ namespace Covid19.ViewModels
             for (var index = 0; index < 5; index++)
                 bottomFive[index] = new Case() { Confirmed = long.MaxValue };
 
-            if (cases.Count < 5)
+            if (cases.Cases.Count < 5)
             {
                 topFiveCases = bottomFiveCases = default;
                 return;
             }
 
-            for(var index = 0; index < cases.Count; index++)
+            for(var index = 0; index < cases.Cases.Count; index++)
             {
-                if (cases[index].Confirmed > topFive[0].Confirmed)
+                if (cases.Cases[index].Confirmed > topFive[0].Confirmed)
                 {
                     topFive[4] = topFive[3];
                     topFive[3] = topFive[2];
                     topFive[2] = topFive[1];
                     topFive[1] = topFive[0];
-                    topFive[0] = cases[index];
+                    topFive[0] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed > topFive[1].Confirmed)
+                else if (cases.Cases[index].Confirmed > topFive[1].Confirmed)
                 {
                     topFive[4] = topFive[3];
                     topFive[3] = topFive[2];
                     topFive[2] = topFive[1];
-                    topFive[1] = cases[index];
+                    topFive[1] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed > topFive[2].Confirmed)
+                else if (cases.Cases[index].Confirmed > topFive[2].Confirmed)
                 {
                     topFive[4] = topFive[3];
                     topFive[3] = topFive[2];
-                    topFive[2] = cases[index];
+                    topFive[2] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed > topFive[3].Confirmed)
+                else if (cases.Cases[index].Confirmed > topFive[3].Confirmed)
                 {
                     topFive[4] = topFive[3];
-                    topFive[3] = cases[index];
+                    topFive[3] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed > topFive[4].Confirmed)
-                    topFive[4] = cases[index];
+                else if (cases.Cases[index].Confirmed > topFive[4].Confirmed)
+                    topFive[4] = cases.Cases[index];
 
-                if (cases[index].Confirmed < bottomFive[0].Confirmed)
+                if (cases.Cases[index].Confirmed < bottomFive[0].Confirmed)
                 {
                     bottomFive[4] = bottomFive[3];
                     bottomFive[3] = bottomFive[2];
                     bottomFive[2] = bottomFive[1];
                     bottomFive[1] = bottomFive[0];
-                    bottomFive[0] = cases[index];
+                    bottomFive[0] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed < bottomFive[1].Confirmed)
+                else if (cases.Cases[index].Confirmed < bottomFive[1].Confirmed)
                 {
                     bottomFive[4] = bottomFive[3];
                     bottomFive[3] = bottomFive[2];
                     bottomFive[2] = bottomFive[1];
-                    bottomFive[1] = cases[index];
+                    bottomFive[1] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed < bottomFive[2].Confirmed)
+                else if (cases.Cases[index].Confirmed < bottomFive[2].Confirmed)
                 {
                     bottomFive[4] = bottomFive[3];
                     bottomFive[3] = bottomFive[2];
-                    bottomFive[2] = cases[index];
+                    bottomFive[2] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed < bottomFive[3].Confirmed)
+                else if (cases.Cases[index].Confirmed < bottomFive[3].Confirmed)
                 {
                     bottomFive[4] = bottomFive[3];
-                    bottomFive[3] = cases[index];
+                    bottomFive[3] = cases.Cases[index];
                 }
-                else if (cases[index].Confirmed < bottomFive[4].Confirmed)
-                    bottomFive[4] = cases[index];
+                else if (cases.Cases[index].Confirmed < bottomFive[4].Confirmed)
+                    bottomFive[4] = cases.Cases[index];
             }
 
-            topFiveCases = new List<Case>(topFive);
-            bottomFiveCases = new List<Case>(bottomFive);
+            topFiveCases = new CaseCollection(topFive);
+            bottomFiveCases = new CaseCollection(bottomFive);
         }
     }
 }

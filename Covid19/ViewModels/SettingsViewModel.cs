@@ -32,6 +32,16 @@ namespace Covid19.ViewModels
             }
         }
 
+        public bool IsTotal
+        {
+            get => _settingsService.Get<bool>(nameof(IsTotal));
+            set
+            {
+                _settingsService.Set(nameof(IsTotal), value);
+                RaisePropertyChanged();
+            }
+        }
+
         public bool IsAlJazeera
         {
             get => _settingsService.Get<bool>(nameof(IsAlJazeera));

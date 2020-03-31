@@ -14,19 +14,26 @@ namespace Covid19.ViewModels
         ICommand _refresh;
         readonly IJhuCsseService _jhuCsseService;
 
-        public TabularViewModel(IJhuCsseService jhuCsseService)
+        public TabularViewModel(IJhuCsseService jhuCsseService, ISettingsService settingsService)
         {
-            Title = "Tabular View";
             _jhuCsseService = jhuCsseService;
+            Title = "Tabular View";
+            IsTotal = settingsService.Get<bool>(nameof(SettingsViewModel.IsTotal));
 
             SearchCommand.Execute(Keywoard);
         }
 
         public override bool IsCachable => true;
 
-        public ObservableCollection<Case> Cases
+        public bool IsTotal
         {
-            get => Get<ObservableCollection<Case>>();
+            get => Get<bool>();
+            private set => Set(value);
+        }
+
+        public CaseCollection Cases
+        {
+            get => Get<CaseCollection>();
             private set => Set(value);
         }
 
@@ -50,10 +57,7 @@ namespace Covid19.ViewModels
         async void SearchAction(string keywoard)
         {
             IsBusy = true;
-
-            var cases = await _jhuCsseService.GetCases(keywoard);
-            Cases = new ObservableCollection<Case>(cases);
-
+            Cases = await _jhuCsseService.GetCases(keywoard);
             IsBusy = false;
         }
     }

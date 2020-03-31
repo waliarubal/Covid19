@@ -50,35 +50,35 @@
                         <chart:StackingColumnSeries
                             EnableAnimation="True"
                             EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases}"
+                            ItemsSource="{Binding TopFiveCases.Cases}"
                             Label="Confirmed"
                             XBindingPath="Country"
                             YBindingPath="Confirmed"
-                            Color="#fcf4a3" />
+                            Color="{DynamicResource Confirmed}" />
                         <chart:StackingColumnSeries
                             EnableAnimation="True"
                             EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases}"
-                            Label="Deaths"
+                            ItemsSource="{Binding TopFiveCases.Cases}"
+                            Label="Deceased"
                             XBindingPath="Country"
                             YBindingPath="Deaths"
-                            Color="#ea3c53" />
+                            Color="{DynamicResource Deaths}" />
                         <chart:StackingColumnSeries
                             EnableAnimation="True"
                             EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases}"
+                            ItemsSource="{Binding TopFiveCases.Cases}"
                             Label="Recovered"
                             XBindingPath="Country"
                             YBindingPath="Recovered"
-                            Color="#98fb98" />
+                            Color="{DynamicResource Recovered}" />
                         <chart:StackingColumnSeries
                             EnableAnimation="True"
                             EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases}"
+                            ItemsSource="{Binding TopFiveCases.Cases}"
                             Label="Active"
                             XBindingPath="Country"
                             YBindingPath="Active"
-                            Color="#73c2fb" />
+                            Color="{DynamicResource Active}" />
                     </chart:SfChart>
                 </StackLayout>
             </Frame>
@@ -101,11 +101,11 @@
                             EnableAnimation="True"
                             EnableTooltip="True"
                             ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases}"
+                            ItemsSource="{Binding BottomFiveCases.Cases}"
                             XBindingPath="Country"
                             YBindingPath="Confirmed" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="Confirmed Cases" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Confirmed, StringFormat='Confirmed Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -121,11 +121,11 @@
                             EnableAnimation="True"
                             EnableTooltip="True"
                             ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases}"
+                            ItemsSource="{Binding BottomFiveCases.Cases}"
                             XBindingPath="Country"
                             YBindingPath="Deaths" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="Deceases Cases" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Deaths, StringFormat='Deceased Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -141,11 +141,11 @@
                             EnableAnimation="True"
                             EnableTooltip="True"
                             ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases}"
+                            ItemsSource="{Binding BottomFiveCases.Cases}"
                             XBindingPath="Country"
                             YBindingPath="Recovered" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="Recovered Cases" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Recovered, StringFormat='Recovered Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -161,11 +161,11 @@
                             EnableAnimation="True"
                             EnableTooltip="True"
                             ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases}"
+                            ItemsSource="{Binding BottomFiveCases.Cases}"
                             XBindingPath="Country"
                             YBindingPath="Active" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="Active Cases" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Active, StringFormat='Active Cases ({0})'}" />
                 </StackLayout>
             </Frame>
         </StackLayout>

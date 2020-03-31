@@ -42,7 +42,8 @@ namespace Covid19
 
             var settingsService = ServiceLocator.Instance.Resolve<ISettingsService>();
             settingsService.Set(nameof(SettingsViewModel.IsBbc), true);
-            settingsService.Set(nameof(SettingsViewModel.IsAlJazeera), true);
+            settingsService.Set(nameof(SettingsViewModel.IsGraphical), true);
+            settingsService.Set(nameof(SettingsViewModel.IsTotal), true);
             await settingsService.Save();
         }
 

@@ -71,16 +71,30 @@
 
                 <Label Style="{DynamicResource SubTitleStyle}" Text="Statistics" />
                 <Frame Grid.Row="1">
-                    <Grid Padding="0,4" Style="{DynamicResource ContainerStyle}">
-                        <Label
-                            Grid.Column="0"
-                            Margin="0,0,4,0"
-                            FontFamily="{DynamicResource FontAwesomeSolid}"
-                            Text="{x:Static shared:FontAwesomeSolid.ChartPie}" />
-                        <Label Text="Show graphical view on start." />
-                        <Switch IsToggled="{Binding IsGraphical}" />
-                    </Grid>
+                    <StackLayout>
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label
+                                Grid.Column="0"
+                                Margin="0,0,4,0"
+                                FontFamily="{DynamicResource FontAwesomeSolid}"
+                                Text="{x:Static shared:FontAwesomeSolid.ChartPie}" />
+                            <Label Text="Show graphical view on start." />
+                            <Switch IsToggled="{Binding IsGraphical}" />
+                        </Grid>
+                        <BoxView />
+                        <Grid Style="{DynamicResource ContainerStyle}">
+                            <Label
+                                Grid.Column="0"
+                                Margin="0,0,4,0"
+                                FontFamily="{DynamicResource FontAwesomeSolid}"
+                                Text="{x:Static shared:FontAwesomeSolid.Plus}" />
+                            <Label Text="Show count in tabular view." />
+                            <Switch IsToggled="{Binding IsTotal}" />
+                        </Grid>
+                    </StackLayout>
+
                 </Frame>
+
 
                 <Label
                     Grid.Row="2"

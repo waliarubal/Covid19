@@ -57,30 +57,84 @@
         </Grid>
         <controls:BusyIndicator Grid.Row="2" IsVisible="{Binding IsBusy}" />
         <ScrollView Grid.Row="2" IsVisible="{Binding IsBusy, Converter={shared:InverseBoolConverter}}">
-            <StackLayout BindableLayout.ItemsSource="{Binding Cases}">
-                <StackLayout.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="FontSize" Value="Small" />
-                    </Style>
-                </StackLayout.Resources>
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalOptions="Fill">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label FontSize="Small" Text="{Binding Country}" />
-                            <Label Grid.Column="1" Text="{Binding Confirmed}" />
-                            <Label Grid.Column="2" Text="{Binding Deaths}" />
-                            <Label Grid.Column="3" Text="{Binding Recovered}" />
-                            <Label Grid.Column="4" Text="{Binding Active}" />
-                        </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+            <StackLayout>
+                <!--  table data  -->
+                <StackLayout BindableLayout.ItemsSource="{Binding Cases.Cases}">
+                    <StackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="Small" />
+                        </Style>
+                    </StackLayout.Resources>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Fill">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label FontSize="Small" Text="{Binding Country}" />
+                                <Label Grid.Column="1" Text="{Binding Confirmed}" />
+                                <Label Grid.Column="2" Text="{Binding Deaths}" />
+                                <Label Grid.Column="3" Text="{Binding Recovered}" />
+                                <Label Grid.Column="4" Text="{Binding Active}" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <!--  totals  -->
+                <Grid IsVisible="{Binding IsTotal}">
+                    <Grid.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="HorizontalTextAlignment" Value="Center" />
+                            <Setter Property="VerticalTextAlignment" Value="Center" />
+                            <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                            <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Style="{DynamicResource CardStyle}">
+                        <StackLayout>
+                            <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.HeadSideMask}" />
+                            <Label Text="Confirmed Cases" />
+                            <Label Text="{Binding Cases.Confirmed}" TextColor="{DynamicResource Confirmed}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Column="1" Style="{DynamicResource CardStyle}">
+                        <StackLayout>
+                            <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.SkullCrossbones}" />
+                            <Label Text="Deceased" />
+                            <Label Text="{Binding Cases.Deaths}" TextColor="{DynamicResource Deaths}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" Style="{DynamicResource CardStyle}">
+                        <StackLayout>
+                            <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.UserCheck}" />
+                            <Label Text="Recovered" />
+                            <Label Text="{Binding Cases.Recovered}" TextColor="{DynamicResource Recovered}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Style="{DynamicResource CardStyle}">
+                        <StackLayout>
+                            <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.Procedures}" />
+                            <Label Text="Active Cases" />
+                            <Label Text="{Binding Cases.Active}" TextColor="{DynamicResource Active}" />
+                        </StackLayout>
+                    </Frame>
+                </Grid>
             </StackLayout>
         </ScrollView>
     </Grid>

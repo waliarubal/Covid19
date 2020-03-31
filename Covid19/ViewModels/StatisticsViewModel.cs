@@ -13,9 +13,8 @@ namespace Covid19.ViewModels
 
         public StatisticsViewModel(INavigationService navigationService, ISettingsService settingsService)
         {
-            Title = "Statistics";
-
             _navigationService = navigationService;
+            Title = "Statistics";
             IsGraphical = settingsService.Get<bool>(nameof(SettingsViewModel.IsGraphical));
         }
 

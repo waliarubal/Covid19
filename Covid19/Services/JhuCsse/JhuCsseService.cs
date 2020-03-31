@@ -12,9 +12,9 @@ namespace Covid19.Services
     {
         const string COUNTRY_WISE_CASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_country.csv";
 
-        public async Task<IEnumerable<Case>> GetCases(string keywoard)
+        public async Task<CaseCollection> GetCases(string keywoard)
         {
-            var cases = new List<Case>();
+            var cases = new CaseCollection();
 
             var culture = CultureInfo.InvariantCulture;
 
