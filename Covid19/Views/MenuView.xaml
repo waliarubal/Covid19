@@ -66,7 +66,7 @@
                 Grid.Row="1"
                 Style="{DynamicResource Icon}"
                 Text="{x:Static shared:FontAwesomeSolid.Info}" />
-            <Label Grid.Row="1" Text="About">
+            <Label Grid.Row="1" Text="Legal &amp; About">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:AboutView}" />
                 </Label.GestureRecognizers>

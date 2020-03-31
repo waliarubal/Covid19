@@ -34,7 +34,7 @@ namespace Covid19.ViewModels
 
         public string VersionString => $"Version {VersionTracking.CurrentVersion} (Build {VersionTracking.CurrentBuild})";
 
-        public override bool IsCachable => true;
+        public override bool IsCachable => false;
 
         #endregion
 

@@ -129,7 +129,7 @@
                 BackgroundColor="{DynamicResource BackgroundLow2}"
                 Command="{Binding SaveCommand}"
                 HorizontalOptions="End"
-                Text="SAVE"
+                Text="SAVE SETTINGS"
                 TextColor="{DynamicResource ForegroundHigh1}" />
         </Grid>
     </Grid>

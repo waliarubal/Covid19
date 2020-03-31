@@ -3,8 +3,53 @@
     x:Class="Covid19.Views.AboutView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="https://github.com/waliarubal/schemas"
+    shared:ViewModelLocator.AutoWireViewModel="True"
     BackgroundColor="{DynamicResource BackgroundHigh}"
     mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <controls:HeaderBar
+            Title="About &amp; Legal"
+            HeightRequest="{Binding Height, Source={x:Reference FooterBar}}"
+            IsMenuAllowed="False" />
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+                        <Setter Property="FontSize" Value="Body" />
+                        <Setter Property="HorizontalTextAlignment" Value="Center" />
+                    </Style>
+                </StackLayout.Resources>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    Text="COVID-19"
+                    TextColor="{DynamicResource ForegroundHigh1}" />
+                <Label Text="{Binding VersionString}" />
+                <Label Text="Concept, design and development by Rubal Walia" />
+                <Label Text="walia.rubal@gmail.com" TextColor="{DynamicResource ForegroundLow}" />
+                <Label Text="+91 99288 93416" TextColor="{DynamicResource ForegroundLow}" />
+            </StackLayout>
+        </ScrollView>
+        <Grid
+            x:Name="FooterBar"
+            Grid.Row="2"
+            BackgroundColor="{DynamicResource BackgroundLow2}">
+            <Button
+                BackgroundColor="{DynamicResource BackgroundLow2}"
+                Command="{Binding CloseCommand}"
+                HorizontalOptions="End"
+                Text="OKAY"
+                TextColor="{DynamicResource ForegroundHigh1}" />
+        </Grid>
+    </Grid>
 </ContentPage>
