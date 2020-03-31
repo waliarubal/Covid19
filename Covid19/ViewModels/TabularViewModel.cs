@@ -51,23 +51,8 @@ namespace Covid19.ViewModels
         {
             IsBusy = true;
 
-            var cases = await _jhuCsseService.GetCases();
-
-            if (string.IsNullOrEmpty(keywoard))
-                Cases = new ObservableCollection<Case>(cases);
-            else
-            {
-                keywoard = keywoard.ToLower();
-
-                var records = new List<Case>();
-                foreach(var record in cases)
-                {
-                    if (record.Country.ToLower().Contains(keywoard))
-                        records.Add(record);
-                }
-
-                Cases = new ObservableCollection<Case>(records);
-            }
+            var cases = await _jhuCsseService.GetCases(keywoard);
+            Cases = new ObservableCollection<Case>(cases);
 
             IsBusy = false;
         }

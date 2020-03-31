@@ -12,7 +12,7 @@ namespace Covid19.ViewModels
 {
     public class ChartViewModel : ViewModelBase
     {
-        ICommand _drawChart, _refresh;
+        ICommand _refresh;
         readonly IJhuCsseService _jhuCsseService;
 
         public ChartViewModel(IJhuCsseService jhuCsseService)
@@ -25,11 +25,18 @@ namespace Covid19.ViewModels
 
         #region properties
 
-        public ObservableCollection<Case> Cases
+        public ObservableCollection<Case> TopFiveCases
         {
             get => Get<ObservableCollection<Case>>();
             private set => Set(value);
         }
+
+        public ObservableCollection<Case> BottomFiveCases
+        {
+            get => Get<ObservableCollection<Case>>();
+            private set => Set(value);
+        }
+
 
         public override bool IsCachable => true;
 
@@ -48,19 +55,30 @@ namespace Covid19.ViewModels
 
         async void RefreshAction()
         {
-            var cases = await _jhuCsseService.GetCases();
-            cases = TopFive(new List<Case>(cases));
-            Cases = new ObservableCollection<Case>(cases);
+            var cases = await _jhuCsseService.GetCases(null);
+
+            IEnumerable<Case> topFive, bottomFive;
+            TopFive(new List<Case>(cases), out topFive, out bottomFive);
+
+            TopFiveCases = new ObservableCollection<Case>(topFive);
+            BottomFiveCases = new ObservableCollection<Case>(bottomFive);
         }
 
-        IEnumerable<Case> TopFive(IList<Case> cases)
+        void TopFive(IList<Case> cases, out IEnumerable<Case> topFiveCases, out IEnumerable<Case> bottomFiveCases)
         {
             var topFive = new Case[5];
             for (var index = 0; index < 5; index++)
                 topFive[index] = new Case();
 
+            var bottomFive = new Case[5];
+            for (var index = 0; index < 5; index++)
+                bottomFive[index] = new Case() { Confirmed = long.MaxValue };
+
             if (cases.Count < 5)
-                return cases;
+            {
+                topFiveCases = bottomFiveCases = default;
+                return;
+            }
 
             for(var index = 0; index < cases.Count; index++)
             {
@@ -92,9 +110,39 @@ namespace Covid19.ViewModels
                 }
                 else if (cases[index].Confirmed > topFive[4].Confirmed)
                     topFive[4] = cases[index];
+
+                if (cases[index].Confirmed < bottomFive[0].Confirmed)
+                {
+                    bottomFive[4] = bottomFive[3];
+                    bottomFive[3] = bottomFive[2];
+                    bottomFive[2] = bottomFive[1];
+                    bottomFive[1] = bottomFive[0];
+                    bottomFive[0] = cases[index];
+                }
+                else if (cases[index].Confirmed < bottomFive[1].Confirmed)
+                {
+                    bottomFive[4] = bottomFive[3];
+                    bottomFive[3] = bottomFive[2];
+                    bottomFive[2] = bottomFive[1];
+                    bottomFive[1] = cases[index];
+                }
+                else if (cases[index].Confirmed < bottomFive[2].Confirmed)
+                {
+                    bottomFive[4] = bottomFive[3];
+                    bottomFive[3] = bottomFive[2];
+                    bottomFive[2] = cases[index];
+                }
+                else if (cases[index].Confirmed < bottomFive[3].Confirmed)
+                {
+                    bottomFive[4] = bottomFive[3];
+                    bottomFive[3] = cases[index];
+                }
+                else if (cases[index].Confirmed < bottomFive[4].Confirmed)
+                    bottomFive[4] = cases[index];
             }
 
-            return new List<Case>(topFive);
+            topFiveCases = new List<Case>(topFive);
+            bottomFiveCases = new List<Case>(bottomFive);
         }
     }
 }

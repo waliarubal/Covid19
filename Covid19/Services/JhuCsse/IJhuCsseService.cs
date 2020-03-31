@@ -8,6 +8,6 @@ namespace Covid19.Services
 {
     public interface IJhuCsseService
     {
-        Task<IEnumerable<Case>> GetCases();
+        Task<IEnumerable<Case>> GetCases(string keywoard);
     }
 }

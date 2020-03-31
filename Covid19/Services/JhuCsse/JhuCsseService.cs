@@ -12,7 +12,7 @@ namespace Covid19.Services
     {
         const string COUNTRY_WISE_CASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_country.csv";
 
-        public async Task<IEnumerable<Case>> GetCases()
+        public async Task<IEnumerable<Case>> GetCases(string keywoard)
         {
             var cases = new List<Case>();
 
@@ -31,6 +31,10 @@ namespace Covid19.Services
                 if (lines.Length == 0)
                     return cases;
 
+                var isSearch = !string.IsNullOrEmpty(keywoard);
+                if (isSearch)
+                    keywoard = keywoard.ToLowerInvariant();
+
                 for (var index = 1; index < lines.Length; index++)
                 {
                     var cells = lines[index].Split(',');
@@ -42,6 +46,10 @@ namespace Covid19.Services
                     var caseData = new Case();
 
                     caseData.Country = cells[cellIndex++];
+
+                    if (isSearch && caseData.Country.ToLowerInvariant().IndexOf(keywoard) <= -1)
+                        continue;
+
                     caseData.LastUpdate = DateTime.ParseExact(cells[cellIndex++], "yyyy-MM-dd HH:mm:ss", culture);
                     caseData.Latitude = cells[cellIndex++];
                     caseData.Longitude = cells[cellIndex++];
