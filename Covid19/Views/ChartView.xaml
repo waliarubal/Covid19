@@ -24,6 +24,8 @@
                 <Setter Property="FontSize" Value="Subtitle" />
                 <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
             </Style>
         </ScrollView.Resources>
         <StackLayout HorizontalOptions="Fill">
@@ -105,7 +107,7 @@
                             XBindingPath="Country"
                             YBindingPath="Confirmed" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Confirmed, StringFormat='Confirmed Cases ({0})'}" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Confirmed, StringFormat='&#xf963;  Confirmed Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -125,7 +127,7 @@
                             XBindingPath="Country"
                             YBindingPath="Deaths" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Deaths, StringFormat='Deceased Cases ({0})'}" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Deaths, StringFormat='&#xf714;  Deceased Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -145,7 +147,7 @@
                             XBindingPath="Country"
                             YBindingPath="Recovered" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Recovered, StringFormat='Recovered Cases ({0})'}" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Recovered, StringFormat='&#xf4fc;  Recovered Cases ({0})'}" />
 
                     <chart:SfChart>
                         <chart:SfChart.Legend>
@@ -165,7 +167,7 @@
                             XBindingPath="Country"
                             YBindingPath="Active" />
                     </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Active, StringFormat='Active Cases ({0})'}" />
+                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Active, StringFormat='&#xf487;  Active Cases ({0})'}" />
                 </StackLayout>
             </Frame>
         </StackLayout>
