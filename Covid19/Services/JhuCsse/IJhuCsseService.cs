@@ -9,5 +9,7 @@ namespace Covid19.Services
     public interface IJhuCsseService
     {
         Task<CaseCollection> GetCases(string keywoard);
+
+        Task<IEnumerable<string>> GetRegions();
     }
 }

@@ -12,7 +12,7 @@ namespace Covid19.ViewModels
 {
     public class ChartViewModel : ViewModelBase
     {
-        ICommand _refresh;
+        ICommand _refresh, _refreshRegionalView;
         readonly IJhuCsseService _jhuCsseService;
 
         public ChartViewModel(IJhuCsseService jhuCsseService)
@@ -26,6 +26,24 @@ namespace Covid19.ViewModels
         #region properties
 
         public CaseCollection TopFiveCases
+        {
+            get => Get<CaseCollection>();
+            private set => Set(value);
+        }
+
+        public ObservableCollection<string> Regions
+        {
+            get => Get<ObservableCollection<string>>();
+            private set => Set(value);
+        }
+
+        public string SelectedRegion
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public CaseCollection SelectedRegionCase
         {
             get => Get<CaseCollection>();
             private set => Set(value);
@@ -50,17 +68,48 @@ namespace Covid19.ViewModels
             }
         }
 
+        public ICommand RefreshRegionalViewCommand
+        {
+            get
+            {
+                if (_refreshRegionalView == null)
+                    _refreshRegionalView = new RelayCommand<string>(RefreshRegionalViewAction);
+
+                return _refreshRegionalView;
+            }
+        }
+
         #endregion
+
+        async void RefreshRegionalViewAction(string region)
+        {
+            if (string.IsNullOrEmpty(region))
+                return;
+
+            IsBusy = true;
+
+            var caseRecord = await _jhuCsseService.GetCases(region);
+            SelectedRegionCase = caseRecord;
+
+            IsBusy = false;
+        }
 
         async void RefreshAction()
         {
+            IsBusy = true;
+
             var cases = await _jhuCsseService.GetCases(null);
+
+            var regions = await _jhuCsseService.GetRegions();
+            Regions = new ObservableCollection<string>(regions);
 
             CaseCollection topFive, bottomFive;
             TopFive(cases, out topFive, out bottomFive);
-
+            
             TopFiveCases = topFive;
             BottomFiveCases = bottomFive;
+
+            IsBusy = false;
         }
 
         void TopFive(CaseCollection cases, out CaseCollection topFiveCases, out CaseCollection bottomFiveCases)

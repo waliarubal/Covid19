@@ -4,172 +4,236 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:controls="clr-namespace:Covid19.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="https://github.com/waliarubal/schemas"
     shared:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <ScrollView>
-        <ScrollView.Resources>
-            <Style TargetType="chart:SfChart">
-                <Setter Property="HeightRequest" Value="160" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="Title" />
-                <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh1}" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-            </Style>
-            <Style x:Key="SubTitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="Subtitle" />
-                <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
-            </Style>
-        </ScrollView.Resources>
-        <StackLayout HorizontalOptions="Fill">
-            <Frame Style="{DynamicResource CardStyle}">
-                <StackLayout>
-                    <Label Text="Five Most Impacted Regions" />
-                    <chart:SfChart>
-                        <chart:SfChart.PrimaryAxis>
-                            <chart:CategoryAxis />
-                        </chart:SfChart.PrimaryAxis>
-                        <chart:SfChart.SecondaryAxis>
-                            <chart:NumericalAxis />
-                        </chart:SfChart.SecondaryAxis>
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend DockPosition="Bottom" />
-                        </chart:SfChart.Legend>
-                        <chart:SfChart.ChartBehaviors>
-                            <chart:ChartTooltipBehavior
-                                BackgroundColor="{DynamicResource BackgroundHigh}"
-                                FontAttributes="Bold"
-                                TextColor="{DynamicResource ForegroundHigh}" />
-                        </chart:SfChart.ChartBehaviors>
+    <Grid>
+        <controls:BusyIndicator IsVisible="{Binding IsBusy}" />
+        <ScrollView IsVisible="{Binding IsBusy, Converter={shared:InverseBoolConverter}}">
+            <ScrollView.Resources>
+                <Style TargetType="chart:SfChart">
+                    <Setter Property="HeightRequest" Value="160" />
+                    <Setter Property="BackgroundColor" Value="Transparent" />
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="Title" />
+                    <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh1}" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="SubTitleStyle" TargetType="Label">
+                    <Setter Property="FontSize" Value="Subtitle" />
+                    <Setter Property="TextColor" Value="{DynamicResource ForegroundMedium}" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                    <Setter Property="VerticalTextAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                </Style>
+            </ScrollView.Resources>
+            <StackLayout HorizontalOptions="Fill">
+                <Frame Style="{DynamicResource CardStyle}">
+                    <StackLayout>
+                        <Label Text="Regional View" />
+                        <Picker
+                            Title="Select Region"
+                            ItemsSource="{Binding Regions}"
+                            SelectedItem="{Binding SelectedRegion}"
+                            TitleColor="{DynamicResource ForegroundLow}">
+                            <Picker.Behaviors>
+                                <shared:EventToCommandBehavior
+                                    Command="{Binding RefreshRegionalViewCommand}"
+                                    CommandParameter="{Binding SelectedRegion}"
+                                    EventName="SelectedIndexChanged" />
+                            </Picker.Behaviors>
+                        </Picker>
 
-                        <chart:StackingColumnSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases.Cases}"
-                            Label="Confirmed"
-                            XBindingPath="Country"
-                            YBindingPath="Confirmed"
-                            Color="{DynamicResource Confirmed}" />
-                        <chart:StackingColumnSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases.Cases}"
-                            Label="Deceased"
-                            XBindingPath="Country"
-                            YBindingPath="Deaths"
-                            Color="{DynamicResource Deaths}" />
-                        <chart:StackingColumnSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases.Cases}"
-                            Label="Recovered"
-                            XBindingPath="Country"
-                            YBindingPath="Recovered"
-                            Color="{DynamicResource Recovered}" />
-                        <chart:StackingColumnSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ItemsSource="{Binding TopFiveCases.Cases}"
-                            Label="Active"
-                            XBindingPath="Country"
-                            YBindingPath="Active"
-                            Color="{DynamicResource Active}" />
-                    </chart:SfChart>
-                </StackLayout>
-            </Frame>
+                        <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                                    <Setter Property="VerticalTextAlignment" Value="Center" />
+                                    <Setter Property="TextColor" Value="{DynamicResource ForegroundHigh}" />
+                                    <Setter Property="FontFamily" Value="{DynamicResource FontAwesomeSolid}" />
+                                </Style>
+                                <Style TargetType="StackLayout">
+                                    <Setter Property="Margin" Value="6" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout>
+                                <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.HeadSideMask}" />
+                                <Label Text="Confirmed Cases" />
+                                <Label Text="{Binding SelectedRegionCase.Confirmed}" TextColor="{DynamicResource Confirmed}" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.SkullCrossbones}" />
+                                <Label Text="Deceased" />
+                                <Label Text="{Binding SelectedRegionCase.Deaths}" TextColor="{DynamicResource Deaths}" />
+                            </StackLayout>
+                            <StackLayout Grid.Row="1">
+                                <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.UserCheck}" />
+                                <Label Text="Recovered" />
+                                <Label Text="{Binding SelectedRegionCase.Recovered}" TextColor="{DynamicResource Recovered}" />
+                            </StackLayout>
+                            <StackLayout Grid.Row="1" Grid.Column="1">
+                                <Label FontSize="Title" Text="{x:Static shared:FontAwesomeSolid.Procedures}" />
+                                <Label Text="Active Cases" />
+                                <Label Text="{Binding SelectedRegionCase.Active}" TextColor="{DynamicResource Active}" />
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
 
-            <Frame Style="{DynamicResource CardStyle}">
-                <StackLayout>
-                    <Label Text="Five Least Impacted Regions" />
+                <Frame Style="{DynamicResource CardStyle}">
+                    <StackLayout>
+                        <Label Text="Five Most Impacted Regions" />
+                        <chart:SfChart>
+                            <chart:SfChart.PrimaryAxis>
+                                <chart:CategoryAxis />
+                            </chart:SfChart.PrimaryAxis>
+                            <chart:SfChart.SecondaryAxis>
+                                <chart:NumericalAxis />
+                            </chart:SfChart.SecondaryAxis>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend DockPosition="Bottom" />
+                            </chart:SfChart.Legend>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior
+                                    BackgroundColor="{DynamicResource BackgroundHigh}"
+                                    FontAttributes="Bold"
+                                    TextColor="{DynamicResource ForegroundHigh}" />
+                            </chart:SfChart.ChartBehaviors>
 
-                    <chart:SfChart>
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend DockPosition="Right" />
-                        </chart:SfChart.Legend>
-                        <chart:SfChart.ChartBehaviors>
-                            <chart:ChartTooltipBehavior
-                                BackgroundColor="{DynamicResource BackgroundHigh}"
-                                FontAttributes="Bold"
-                                TextColor="{DynamicResource ForegroundHigh}" />
-                        </chart:SfChart.ChartBehaviors>
-                        <chart:DoughnutSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases.Cases}"
-                            XBindingPath="Country"
-                            YBindingPath="Confirmed" />
-                    </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Confirmed, StringFormat='&#xf963;  Confirmed Cases ({0})'}" />
+                            <chart:StackingColumnSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ItemsSource="{Binding TopFiveCases.Cases}"
+                                Label="Confirmed"
+                                XBindingPath="Country"
+                                YBindingPath="Confirmed"
+                                Color="{DynamicResource Confirmed}" />
+                            <chart:StackingColumnSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ItemsSource="{Binding TopFiveCases.Cases}"
+                                Label="Deceased"
+                                XBindingPath="Country"
+                                YBindingPath="Deaths"
+                                Color="{DynamicResource Deaths}" />
+                            <chart:StackingColumnSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ItemsSource="{Binding TopFiveCases.Cases}"
+                                Label="Recovered"
+                                XBindingPath="Country"
+                                YBindingPath="Recovered"
+                                Color="{DynamicResource Recovered}" />
+                            <chart:StackingColumnSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ItemsSource="{Binding TopFiveCases.Cases}"
+                                Label="Active"
+                                XBindingPath="Country"
+                                YBindingPath="Active"
+                                Color="{DynamicResource Active}" />
+                        </chart:SfChart>
+                    </StackLayout>
+                </Frame>
 
-                    <chart:SfChart>
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend DockPosition="Right" />
-                        </chart:SfChart.Legend>
-                        <chart:SfChart.ChartBehaviors>
-                            <chart:ChartTooltipBehavior
-                                BackgroundColor="{DynamicResource BackgroundHigh}"
-                                FontAttributes="Bold"
-                                TextColor="{DynamicResource ForegroundHigh}" />
-                        </chart:SfChart.ChartBehaviors>
-                        <chart:DoughnutSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases.Cases}"
-                            XBindingPath="Country"
-                            YBindingPath="Deaths" />
-                    </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Deaths, StringFormat='&#xf714;  Deceased Cases ({0})'}" />
+                <Frame Style="{DynamicResource CardStyle}">
+                    <StackLayout>
+                        <Label Text="Five Least Impacted Regions" />
 
-                    <chart:SfChart>
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend DockPosition="Right" />
-                        </chart:SfChart.Legend>
-                        <chart:SfChart.ChartBehaviors>
-                            <chart:ChartTooltipBehavior
-                                BackgroundColor="{DynamicResource BackgroundHigh}"
-                                FontAttributes="Bold"
-                                TextColor="{DynamicResource ForegroundHigh}" />
-                        </chart:SfChart.ChartBehaviors>
-                        <chart:DoughnutSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases.Cases}"
-                            XBindingPath="Country"
-                            YBindingPath="Recovered" />
-                    </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Recovered, StringFormat='&#xf4fc;  Recovered Cases ({0})'}" />
+                        <chart:SfChart>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend DockPosition="Right" />
+                            </chart:SfChart.Legend>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior
+                                    BackgroundColor="{DynamicResource BackgroundHigh}"
+                                    FontAttributes="Bold"
+                                    TextColor="{DynamicResource ForegroundHigh}" />
+                            </chart:SfChart.ChartBehaviors>
+                            <chart:DoughnutSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ExplodeOnTouch="True"
+                                ItemsSource="{Binding BottomFiveCases.Cases}"
+                                XBindingPath="Country"
+                                YBindingPath="Confirmed" />
+                        </chart:SfChart>
+                        <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Confirmed, StringFormat='&#xf963;  Confirmed Cases ({0})'}" />
 
-                    <chart:SfChart>
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend DockPosition="Right" />
-                        </chart:SfChart.Legend>
-                        <chart:SfChart.ChartBehaviors>
-                            <chart:ChartTooltipBehavior
-                                BackgroundColor="{DynamicResource BackgroundHigh}"
-                                FontAttributes="Bold"
-                                TextColor="{DynamicResource ForegroundHigh}" />
-                        </chart:SfChart.ChartBehaviors>
-                        <chart:DoughnutSeries
-                            EnableAnimation="True"
-                            EnableTooltip="True"
-                            ExplodeOnTouch="True"
-                            ItemsSource="{Binding BottomFiveCases.Cases}"
-                            XBindingPath="Country"
-                            YBindingPath="Active" />
-                    </chart:SfChart>
-                    <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Active, StringFormat='&#xf487;  Active Cases ({0})'}" />
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-    </ScrollView>
+                        <chart:SfChart>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend DockPosition="Right" />
+                            </chart:SfChart.Legend>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior
+                                    BackgroundColor="{DynamicResource BackgroundHigh}"
+                                    FontAttributes="Bold"
+                                    TextColor="{DynamicResource ForegroundHigh}" />
+                            </chart:SfChart.ChartBehaviors>
+                            <chart:DoughnutSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ExplodeOnTouch="True"
+                                ItemsSource="{Binding BottomFiveCases.Cases}"
+                                XBindingPath="Country"
+                                YBindingPath="Deaths" />
+                        </chart:SfChart>
+                        <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Deaths, StringFormat='&#xf714;  Deceased Cases ({0})'}" />
+
+                        <chart:SfChart>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend DockPosition="Right" />
+                            </chart:SfChart.Legend>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior
+                                    BackgroundColor="{DynamicResource BackgroundHigh}"
+                                    FontAttributes="Bold"
+                                    TextColor="{DynamicResource ForegroundHigh}" />
+                            </chart:SfChart.ChartBehaviors>
+                            <chart:DoughnutSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ExplodeOnTouch="True"
+                                ItemsSource="{Binding BottomFiveCases.Cases}"
+                                XBindingPath="Country"
+                                YBindingPath="Recovered" />
+                        </chart:SfChart>
+                        <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Recovered, StringFormat='&#xf4fc;  Recovered Cases ({0})'}" />
+
+                        <chart:SfChart>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend DockPosition="Right" />
+                            </chart:SfChart.Legend>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior
+                                    BackgroundColor="{DynamicResource BackgroundHigh}"
+                                    FontAttributes="Bold"
+                                    TextColor="{DynamicResource ForegroundHigh}" />
+                            </chart:SfChart.ChartBehaviors>
+                            <chart:DoughnutSeries
+                                EnableAnimation="True"
+                                EnableTooltip="True"
+                                ExplodeOnTouch="True"
+                                ItemsSource="{Binding BottomFiveCases.Cases}"
+                                XBindingPath="Country"
+                                YBindingPath="Active" />
+                        </chart:SfChart>
+                        <Label Style="{DynamicResource SubTitleStyle}" Text="{Binding BottomFiveCases.Active, StringFormat='&#xf487;  Active Cases ({0})'}" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentView>
