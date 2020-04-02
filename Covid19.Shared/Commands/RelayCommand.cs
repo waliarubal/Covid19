@@ -50,7 +50,7 @@ namespace Covid19.Shared.Commands
             {
                 argument = (P)parameter;
             }
-            catch (Exception ex)
+            catch (InvalidCastException)
             {
                 argument = default;
             }
