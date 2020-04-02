@@ -104,8 +104,8 @@ namespace Covid19.ViewModels
 
             var regions = await _jhuCsseService.GetRegions();
             Regions = new ObservableCollection<string>(regions);
-            //if (string.IsNullOrEmpty(SelectedRegion) && !string.IsNullOrEmpty(_defaultRegion))
-            //    SelectedRegion = _defaultRegion;
+            if (string.IsNullOrEmpty(SelectedRegion) && !string.IsNullOrEmpty(_defaultRegion))
+                SelectedRegion = _defaultRegion;
 
             CaseCollection topFive, bottomFive;
             TopFive(cases, out topFive, out bottomFive);

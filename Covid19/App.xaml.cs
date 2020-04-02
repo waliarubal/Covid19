@@ -13,7 +13,7 @@ namespace Covid19
 {
     public partial class App : Application
     {
-        const string SYNCFUSION_LICENE_KEY = "MjI5OTQ5QDMxMzcyZTM0MmUzME1JMDNackF4K2dqdkpRa1h6NFNmemo1UjZQcndzaERySHFYQzVJb2VZSm89";
+        const string SYNCFUSION_LICENE_KEY = "MjMyMjg0QDMxMzgyZTMxMmUzMEkvZFl5Z3dMbUtDbTVvc2puaEZ4NG02TGZwMGgvZ1dXd3pHQkJuWDlwUU09";
 
         public App()
         {

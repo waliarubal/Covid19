@@ -14,10 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.13.0" />
+    <PackageReference Include="AngleSharp" Version="0.14.0" />
     <PackageReference Include="CodeHollow.FeedReader" Version="1.2.1" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.4.0.55" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.42" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>
 
