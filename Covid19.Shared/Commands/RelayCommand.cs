@@ -45,11 +45,18 @@ namespace Covid19.Shared.Commands
 
             IsExecuting = true;
 
-            if (IsAsynchronous)
+            P argument;
+            try
             {
-                var argument = (P)parameter;
-                await Task.Run(() => _action.Invoke(argument));
+                argument = (P)parameter;
             }
+            catch (Exception ex)
+            {
+                argument = default;
+            }
+
+            if (IsAsynchronous)
+                await Task.Run(() => _action.Invoke(argument));
             else
                 _action.Invoke((P)parameter);
 
