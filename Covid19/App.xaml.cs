@@ -44,6 +44,7 @@ namespace Covid19
             settingsService.Set(nameof(SettingsViewModel.IsBbc), true);
             settingsService.Set(nameof(SettingsViewModel.IsGraphical), true);
             settingsService.Set(nameof(SettingsViewModel.IsTotal), true);
+            settingsService.Set(nameof(SettingsViewModel.DefaultRegion), "India");
             await settingsService.Save();
         }
 

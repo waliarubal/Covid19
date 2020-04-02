@@ -14,11 +14,13 @@ namespace Covid19.ViewModels
     {
         ICommand _refresh, _refreshRegionalView;
         readonly IJhuCsseService _jhuCsseService;
+        readonly string _defaultRegion;
 
-        public ChartViewModel(IJhuCsseService jhuCsseService)
+        public ChartViewModel(IJhuCsseService jhuCsseService, ISettingsService settingsService)
         {
             Title = "Graphical View";
             _jhuCsseService = jhuCsseService;
+            _defaultRegion = settingsService.Get<string>(nameof(SettingsViewModel.DefaultRegion));;
 
             RefreshCommand.Execute(null);
         }
@@ -102,6 +104,8 @@ namespace Covid19.ViewModels
 
             var regions = await _jhuCsseService.GetRegions();
             Regions = new ObservableCollection<string>(regions);
+            //if (string.IsNullOrEmpty(SelectedRegion) && !string.IsNullOrEmpty(_defaultRegion))
+            //    SelectedRegion = _defaultRegion;
 
             CaseCollection topFive, bottomFive;
             TopFive(cases, out topFive, out bottomFive);

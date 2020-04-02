@@ -3,6 +3,7 @@ using Covid19.Shared.Base;
 using Covid19.Shared.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 
@@ -12,12 +13,19 @@ namespace Covid19.ViewModels
     {
         readonly INavigationService _navigationService;
         readonly ISettingsService _settingsService;
-        ICommand _save;
+        readonly IJhuCsseService _jhuCcseService;
+        ICommand _save, _refreshRegions;
 
-        public SettingsViewModel(INavigationService navigationService, ISettingsService settingsService)
+        public SettingsViewModel(
+            INavigationService navigationService, 
+            ISettingsService settingsService, 
+            IJhuCsseService jhuCcseService)
         {
             _navigationService = navigationService;
             _settingsService = settingsService;
+            _jhuCcseService = jhuCcseService;
+
+            RefreshRegionsCommand.Execute(null);
         }
 
         #region properties
@@ -78,7 +86,7 @@ namespace Covid19.ViewModels
             set
             {
                 _settingsService.Set(nameof(IsTheNewYorkTimes), value);
-                RaisePropertyChanged(nameof(IsTheNewYorkTimes));
+                RaisePropertyChanged();
             }
         }
 
@@ -88,7 +96,7 @@ namespace Covid19.ViewModels
             set
             {
                 _settingsService.Set(nameof(IsTimesOfIndia), value);
-                RaisePropertyChanged(nameof(IsTimesOfIndia));
+                RaisePropertyChanged();
             }
         }
 
@@ -98,8 +106,24 @@ namespace Covid19.ViewModels
             set
             {
                 _settingsService.Set(nameof(IsYahooNews), value);
-                RaisePropertyChanged(nameof(IsYahooNews));
+                RaisePropertyChanged();
             }
+        }
+
+        public string DefaultRegion
+        {
+            get => _settingsService.Get<string>(nameof(DefaultRegion));
+            set
+            {
+                _settingsService.Set(nameof(DefaultRegion), value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> Regions
+        {
+            get => Get<ObservableCollection<string>>();
+            private set => Set(value);
         }
 
         public ICommand SaveCommand
@@ -113,9 +137,30 @@ namespace Covid19.ViewModels
             }
         }
 
+        public ICommand RefreshRegionsCommand
+        {
+            get
+            {
+                if (_refreshRegions == null)
+                    _refreshRegions = new RelayCommand(RefreshRegionsAction);
+
+                return _refreshRegions;
+            }
+        }
+
         public override bool IsCachable => false;
 
         #endregion
+
+        async void RefreshRegionsAction()
+        {
+            IsBusy = true;
+
+            var regions = await _jhuCcseService.GetRegions();
+            Regions = new ObservableCollection<string>(regions);
+
+            IsBusy = false;
+        }
 
         async void SaveAction()
         {
