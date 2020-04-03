@@ -5,6 +5,8 @@ An informative application to fetch and show infection statistics, world map, ne
 
 The information shown in application is not home grown but from reliable sources like World Health Organization, BBC News, CNN, The New York Times, Yahoo News, Al Jazeera, and Johns Hopkins University Center for Systems Science and Engineering
 
+[Download APK Here](https://github.com/waliarubal/Covid19/releases/latest/download/com.rubalwalia.covid19.apk)
+
 ![Screenshot](/Screenshots/1.png)
 
 ![Screenshot](/Screenshots/2.png)
