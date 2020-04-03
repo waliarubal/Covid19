@@ -37,6 +37,7 @@
                         <Label Text="Regional View" />
                         <Picker
                             Title="Select Region"
+                            Grid.Column="1"
                             ItemsSource="{Binding Regions}"
                             SelectedItem="{Binding SelectedRegion}"
                             TitleColor="{DynamicResource ForegroundLow}">

@@ -58,7 +58,7 @@ namespace Covid19.Shared.Commands
             if (IsAsynchronous)
                 await Task.Run(() => _action.Invoke(argument));
             else
-                _action.Invoke((P)parameter);
+                _action.Invoke(argument);
 
             IsExecuting = false;
         }
