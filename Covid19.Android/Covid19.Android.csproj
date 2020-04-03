@@ -47,7 +47,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <MandroidI18n />
     <AndroidSupportedAbis>
     </AndroidSupportedAbis>
