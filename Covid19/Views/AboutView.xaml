@@ -54,7 +54,7 @@
                     </Frame>
 
                     <Label FontSize="Large" Text="Rubal Walia" />
-                    <Label FontSize="Small" Text="Concept &#9679; Development" />
+                    <Label FontSize="Small" Text="Concept &#9679; Design &#9679; Development" />
                     <Label Text="walia.rubal@gmail.com" TextColor="{DynamicResource ForegroundLow}" />
                     <Label Text="+91 99288 93416" TextColor="{DynamicResource ForegroundLow}" />
                 </StackLayout>
@@ -65,7 +65,7 @@
                     </Frame>
 
                     <Label FontSize="Large" Text="Rishabh Verma" />
-                    <Label FontSize="Small" Text="Graphics &#9679; Design" />
+                    <Label FontSize="Small" Text="Logo Graphics" />
                     <Label Text="rish.verma@gmail.com" TextColor="{DynamicResource ForegroundLow}" />
                     <Label Text="+91 96028 17406" TextColor="{DynamicResource ForegroundLow}" />
                 </StackLayout>
