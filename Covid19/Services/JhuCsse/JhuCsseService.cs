@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Covid19.Services
 {
-    public class JhuCsseService: IJhuCsseService
+    public class JhuCsseService : IJhuCsseService
     {
         const string COUNTRY_WISE_CASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_country.csv";
 
@@ -39,6 +39,7 @@ namespace Covid19.Services
                 if (isSearch)
                     keywoard = keywoard.ToLowerInvariant();
 
+                decimal tempNumber;
                 for (var index = 1; index < lines.Length; index++)
                 {
                     var cells = lines[index].Split(',');
@@ -60,10 +61,10 @@ namespace Covid19.Services
                     caseData.LastUpdate = DateTime.ParseExact(cells[cellIndex++], "yyyy-MM-dd HH:mm:ss", culture);
                     caseData.Latitude = cells[cellIndex++];
                     caseData.Longitude = cells[cellIndex++];
-                    caseData.Confirmed = long.Parse(cells[cellIndex++]);
-                    caseData.Deaths = long.Parse(cells[cellIndex++]);
-                    caseData.Recovered = long.Parse(cells[cellIndex++]);
-                    caseData.Active = long.Parse(cells[cellIndex++]);
+                    caseData.Confirmed = decimal.TryParse(cells[cellIndex++], out tempNumber) ? (long)tempNumber : 0;
+                    caseData.Deaths = decimal.TryParse(cells[cellIndex++], out tempNumber) ? (long)tempNumber : 0;
+                    caseData.Recovered = decimal.TryParse(cells[cellIndex++], out tempNumber) ? (long)tempNumber : 0;
+                    caseData.Active = decimal.TryParse(cells[cellIndex++], out tempNumber) ? (long)tempNumber : 0;
                     cases.Add(caseData);
                 }
             }
